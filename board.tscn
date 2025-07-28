@@ -1,0 +1,1777 @@
+[gd_scene load_steps=10 format=3 uid="uid://br5etjyre64ws"]
+
+[ext_resource type="Script" uid="uid://dxj1e5rrdsaav" path="res://board.gd" id="1_p0ybc"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_psm7c"]
+friction = 0.64
+bounce = 0.28
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jqgjh"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_p0ybc"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_psm7c"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8l818"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p0ybc"]
+radius = 5.73176
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_psm7c"]
+size = Vector2(42.2954, 486)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8l818"]
+size = Vector2(12.18, 538)
+
+[node name="board" type="Node2D"]
+script = ExtResource("1_p0ybc")
+physics_material_balls = SubResource("PhysicsMaterial_psm7c")
+physics_material_bumpers = SubResource("PhysicsMaterial_psm7c")
+physics_material_walls = SubResource("PhysicsMaterial_psm7c")
+goal_area_spots = 13
+wall_thickness = 52.0
+goal_area_height_ratio = 1.0
+post_width_ratio = 0.21
+bumper_col_count = 17
+bumper_dimension_ratio = 0.28
+spawn_to_bumpers_gap = 153.0
+bumpers_to_goal_gap = 69.0
+spawn_width_ratio = 0.14
+
+[node name="borders" type="Node2D" parent="."]
+
+[node name="board_collisions" type="StaticBody2D" parent="borders"]
+unique_name_in_owner = true
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="w_coll_top" type="CollisionShape2D" parent="borders/board_collisions"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, -176)
+shape = SubResource("WorldBoundaryShape2D_jqgjh")
+
+[node name="w_coll_left" type="CollisionShape2D" parent="borders/board_collisions"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(52, 512)
+shape = SubResource("WorldBoundaryShape2D_p0ybc")
+
+[node name="w_coll_right" type="CollisionShape2D" parent="borders/board_collisions"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(748, 512)
+shape = SubResource("WorldBoundaryShape2D_psm7c")
+
+[node name="w_coll_bot" type="CollisionShape2D" parent="borders/board_collisions"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(400, 972)
+shape = SubResource("WorldBoundaryShape2D_8l818")
+
+[node name="boundary_poly" type="Polygon2D" parent="borders"]
+unique_name_in_owner = true
+polygon = PackedVector2Array(0, 0, 0, 1024, 800, 1024, 800, 0, 748, 0, 748, 972, 52, 972, 52, 0)
+
+[node name="bumpers" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="bump_poly_0_0" type="Polygon2D" parent="bumpers"]
+position = Vector2(72.4706, 155.866)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_0_0"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_0_0/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_1_0" type="Polygon2D" parent="bumpers"]
+position = Vector2(113.412, 155.866)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_1_0"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_1_0/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_2_0" type="Polygon2D" parent="bumpers"]
+position = Vector2(154.353, 155.866)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_2_0"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_2_0/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_3_0" type="Polygon2D" parent="bumpers"]
+position = Vector2(195.294, 155.866)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_3_0"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_3_0/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_4_0" type="Polygon2D" parent="bumpers"]
+position = Vector2(236.235, 155.866)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_4_0"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_4_0/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_5_0" type="Polygon2D" parent="bumpers"]
+position = Vector2(277.176, 155.866)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_5_0"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_5_0/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_6_0" type="Polygon2D" parent="bumpers"]
+position = Vector2(318.118, 155.866)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_6_0"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_6_0/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_7_0" type="Polygon2D" parent="bumpers"]
+position = Vector2(359.059, 155.866)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_7_0"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_7_0/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_8_0" type="Polygon2D" parent="bumpers"]
+position = Vector2(400, 155.866)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_8_0"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_8_0/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_9_0" type="Polygon2D" parent="bumpers"]
+position = Vector2(440.941, 155.866)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_9_0"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_9_0/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_10_0" type="Polygon2D" parent="bumpers"]
+position = Vector2(481.882, 155.866)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_10_0"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_10_0/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_11_0" type="Polygon2D" parent="bumpers"]
+position = Vector2(522.824, 155.866)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_11_0"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_11_0/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_12_0" type="Polygon2D" parent="bumpers"]
+position = Vector2(563.765, 155.866)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_12_0"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_12_0/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_13_0" type="Polygon2D" parent="bumpers"]
+position = Vector2(604.706, 155.866)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_13_0"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_13_0/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_14_0" type="Polygon2D" parent="bumpers"]
+position = Vector2(645.647, 155.866)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_14_0"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_14_0/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_15_0" type="Polygon2D" parent="bumpers"]
+position = Vector2(686.588, 155.866)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_15_0"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_15_0/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_16_0" type="Polygon2D" parent="bumpers"]
+position = Vector2(727.529, 155.866)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_16_0"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_16_0/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_0_1" type="Polygon2D" parent="bumpers"]
+position = Vector2(92.9412, 191.322)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_0_1"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_0_1/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_1_1" type="Polygon2D" parent="bumpers"]
+position = Vector2(133.882, 191.322)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_1_1"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_1_1/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_2_1" type="Polygon2D" parent="bumpers"]
+position = Vector2(174.824, 191.322)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_2_1"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_2_1/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_3_1" type="Polygon2D" parent="bumpers"]
+position = Vector2(215.765, 191.322)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_3_1"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_3_1/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_4_1" type="Polygon2D" parent="bumpers"]
+position = Vector2(256.706, 191.322)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_4_1"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_4_1/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_5_1" type="Polygon2D" parent="bumpers"]
+position = Vector2(297.647, 191.322)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_5_1"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_5_1/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_6_1" type="Polygon2D" parent="bumpers"]
+position = Vector2(338.588, 191.322)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_6_1"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_6_1/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_7_1" type="Polygon2D" parent="bumpers"]
+position = Vector2(379.529, 191.322)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_7_1"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_7_1/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_8_1" type="Polygon2D" parent="bumpers"]
+position = Vector2(420.471, 191.322)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_8_1"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_8_1/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_9_1" type="Polygon2D" parent="bumpers"]
+position = Vector2(461.412, 191.322)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_9_1"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_9_1/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_10_1" type="Polygon2D" parent="bumpers"]
+position = Vector2(502.353, 191.322)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_10_1"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_10_1/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_11_1" type="Polygon2D" parent="bumpers"]
+position = Vector2(543.294, 191.322)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_11_1"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_11_1/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_12_1" type="Polygon2D" parent="bumpers"]
+position = Vector2(584.235, 191.322)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_12_1"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_12_1/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_13_1" type="Polygon2D" parent="bumpers"]
+position = Vector2(625.176, 191.322)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_13_1"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_13_1/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_14_1" type="Polygon2D" parent="bumpers"]
+position = Vector2(666.118, 191.322)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_14_1"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_14_1/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_15_1" type="Polygon2D" parent="bumpers"]
+position = Vector2(707.059, 191.322)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_15_1"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_15_1/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_0_2" type="Polygon2D" parent="bumpers"]
+position = Vector2(72.4706, 226.778)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_0_2"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_0_2/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_1_2" type="Polygon2D" parent="bumpers"]
+position = Vector2(113.412, 226.778)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_1_2"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_1_2/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_2_2" type="Polygon2D" parent="bumpers"]
+position = Vector2(154.353, 226.778)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_2_2"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_2_2/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_3_2" type="Polygon2D" parent="bumpers"]
+position = Vector2(195.294, 226.778)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_3_2"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_3_2/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_4_2" type="Polygon2D" parent="bumpers"]
+position = Vector2(236.235, 226.778)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_4_2"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_4_2/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_5_2" type="Polygon2D" parent="bumpers"]
+position = Vector2(277.176, 226.778)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_5_2"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_5_2/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_6_2" type="Polygon2D" parent="bumpers"]
+position = Vector2(318.118, 226.778)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_6_2"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_6_2/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_7_2" type="Polygon2D" parent="bumpers"]
+position = Vector2(359.059, 226.778)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_7_2"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_7_2/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_8_2" type="Polygon2D" parent="bumpers"]
+position = Vector2(400, 226.778)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_8_2"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_8_2/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_9_2" type="Polygon2D" parent="bumpers"]
+position = Vector2(440.941, 226.778)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_9_2"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_9_2/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_10_2" type="Polygon2D" parent="bumpers"]
+position = Vector2(481.882, 226.778)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_10_2"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_10_2/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_11_2" type="Polygon2D" parent="bumpers"]
+position = Vector2(522.824, 226.778)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_11_2"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_11_2/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_12_2" type="Polygon2D" parent="bumpers"]
+position = Vector2(563.765, 226.778)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_12_2"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_12_2/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_13_2" type="Polygon2D" parent="bumpers"]
+position = Vector2(604.706, 226.778)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_13_2"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_13_2/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_14_2" type="Polygon2D" parent="bumpers"]
+position = Vector2(645.647, 226.778)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_14_2"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_14_2/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_15_2" type="Polygon2D" parent="bumpers"]
+position = Vector2(686.588, 226.778)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_15_2"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_15_2/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_16_2" type="Polygon2D" parent="bumpers"]
+position = Vector2(727.529, 226.778)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_16_2"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_16_2/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_0_3" type="Polygon2D" parent="bumpers"]
+position = Vector2(92.9412, 262.234)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_0_3"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_0_3/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_1_3" type="Polygon2D" parent="bumpers"]
+position = Vector2(133.882, 262.234)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_1_3"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_1_3/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_2_3" type="Polygon2D" parent="bumpers"]
+position = Vector2(174.824, 262.234)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_2_3"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_2_3/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_3_3" type="Polygon2D" parent="bumpers"]
+position = Vector2(215.765, 262.234)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_3_3"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_3_3/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_4_3" type="Polygon2D" parent="bumpers"]
+position = Vector2(256.706, 262.234)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_4_3"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_4_3/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_5_3" type="Polygon2D" parent="bumpers"]
+position = Vector2(297.647, 262.234)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_5_3"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_5_3/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_6_3" type="Polygon2D" parent="bumpers"]
+position = Vector2(338.588, 262.234)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_6_3"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_6_3/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_7_3" type="Polygon2D" parent="bumpers"]
+position = Vector2(379.529, 262.234)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_7_3"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_7_3/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_8_3" type="Polygon2D" parent="bumpers"]
+position = Vector2(420.471, 262.234)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_8_3"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_8_3/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_9_3" type="Polygon2D" parent="bumpers"]
+position = Vector2(461.412, 262.234)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_9_3"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_9_3/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_10_3" type="Polygon2D" parent="bumpers"]
+position = Vector2(502.353, 262.234)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_10_3"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_10_3/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_11_3" type="Polygon2D" parent="bumpers"]
+position = Vector2(543.294, 262.234)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_11_3"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_11_3/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_12_3" type="Polygon2D" parent="bumpers"]
+position = Vector2(584.235, 262.234)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_12_3"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_12_3/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_13_3" type="Polygon2D" parent="bumpers"]
+position = Vector2(625.176, 262.234)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_13_3"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_13_3/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_14_3" type="Polygon2D" parent="bumpers"]
+position = Vector2(666.118, 262.234)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_14_3"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_14_3/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_15_3" type="Polygon2D" parent="bumpers"]
+position = Vector2(707.059, 262.234)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_15_3"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_15_3/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_0_4" type="Polygon2D" parent="bumpers"]
+position = Vector2(72.4706, 297.69)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_0_4"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_0_4/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_1_4" type="Polygon2D" parent="bumpers"]
+position = Vector2(113.412, 297.69)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_1_4"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_1_4/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_2_4" type="Polygon2D" parent="bumpers"]
+position = Vector2(154.353, 297.69)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_2_4"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_2_4/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_3_4" type="Polygon2D" parent="bumpers"]
+position = Vector2(195.294, 297.69)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_3_4"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_3_4/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_4_4" type="Polygon2D" parent="bumpers"]
+position = Vector2(236.235, 297.69)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_4_4"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_4_4/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_5_4" type="Polygon2D" parent="bumpers"]
+position = Vector2(277.176, 297.69)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_5_4"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_5_4/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_6_4" type="Polygon2D" parent="bumpers"]
+position = Vector2(318.118, 297.69)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_6_4"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_6_4/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_7_4" type="Polygon2D" parent="bumpers"]
+position = Vector2(359.059, 297.69)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_7_4"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_7_4/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_8_4" type="Polygon2D" parent="bumpers"]
+position = Vector2(400, 297.69)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_8_4"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_8_4/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_9_4" type="Polygon2D" parent="bumpers"]
+position = Vector2(440.941, 297.69)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_9_4"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_9_4/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_10_4" type="Polygon2D" parent="bumpers"]
+position = Vector2(481.882, 297.69)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_10_4"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_10_4/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_11_4" type="Polygon2D" parent="bumpers"]
+position = Vector2(522.824, 297.69)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_11_4"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_11_4/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_12_4" type="Polygon2D" parent="bumpers"]
+position = Vector2(563.765, 297.69)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_12_4"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_12_4/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_13_4" type="Polygon2D" parent="bumpers"]
+position = Vector2(604.706, 297.69)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_13_4"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_13_4/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_14_4" type="Polygon2D" parent="bumpers"]
+position = Vector2(645.647, 297.69)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_14_4"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_14_4/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_15_4" type="Polygon2D" parent="bumpers"]
+position = Vector2(686.588, 297.69)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_15_4"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_15_4/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_16_4" type="Polygon2D" parent="bumpers"]
+position = Vector2(727.529, 297.69)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_16_4"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_16_4/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_0_5" type="Polygon2D" parent="bumpers"]
+position = Vector2(92.9412, 333.146)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_0_5"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_0_5/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_1_5" type="Polygon2D" parent="bumpers"]
+position = Vector2(133.882, 333.146)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_1_5"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_1_5/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_2_5" type="Polygon2D" parent="bumpers"]
+position = Vector2(174.824, 333.146)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_2_5"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_2_5/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_3_5" type="Polygon2D" parent="bumpers"]
+position = Vector2(215.765, 333.146)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_3_5"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_3_5/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_4_5" type="Polygon2D" parent="bumpers"]
+position = Vector2(256.706, 333.146)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_4_5"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_4_5/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_5_5" type="Polygon2D" parent="bumpers"]
+position = Vector2(297.647, 333.146)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_5_5"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_5_5/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_6_5" type="Polygon2D" parent="bumpers"]
+position = Vector2(338.588, 333.146)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_6_5"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_6_5/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_7_5" type="Polygon2D" parent="bumpers"]
+position = Vector2(379.529, 333.146)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_7_5"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_7_5/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_8_5" type="Polygon2D" parent="bumpers"]
+position = Vector2(420.471, 333.146)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_8_5"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_8_5/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_9_5" type="Polygon2D" parent="bumpers"]
+position = Vector2(461.412, 333.146)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_9_5"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_9_5/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_10_5" type="Polygon2D" parent="bumpers"]
+position = Vector2(502.353, 333.146)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_10_5"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_10_5/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_11_5" type="Polygon2D" parent="bumpers"]
+position = Vector2(543.294, 333.146)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_11_5"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_11_5/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_12_5" type="Polygon2D" parent="bumpers"]
+position = Vector2(584.235, 333.146)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_12_5"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_12_5/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_13_5" type="Polygon2D" parent="bumpers"]
+position = Vector2(625.176, 333.146)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_13_5"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_13_5/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_14_5" type="Polygon2D" parent="bumpers"]
+position = Vector2(666.118, 333.146)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_14_5"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_14_5/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_15_5" type="Polygon2D" parent="bumpers"]
+position = Vector2(707.059, 333.146)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_15_5"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_15_5/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_0_6" type="Polygon2D" parent="bumpers"]
+position = Vector2(72.4706, 368.602)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_0_6"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_0_6/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_1_6" type="Polygon2D" parent="bumpers"]
+position = Vector2(113.412, 368.602)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_1_6"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_1_6/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_2_6" type="Polygon2D" parent="bumpers"]
+position = Vector2(154.353, 368.602)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_2_6"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_2_6/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_3_6" type="Polygon2D" parent="bumpers"]
+position = Vector2(195.294, 368.602)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_3_6"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_3_6/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_4_6" type="Polygon2D" parent="bumpers"]
+position = Vector2(236.235, 368.602)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_4_6"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_4_6/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_5_6" type="Polygon2D" parent="bumpers"]
+position = Vector2(277.176, 368.602)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_5_6"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_5_6/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_6_6" type="Polygon2D" parent="bumpers"]
+position = Vector2(318.118, 368.602)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_6_6"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_6_6/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_7_6" type="Polygon2D" parent="bumpers"]
+position = Vector2(359.059, 368.602)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_7_6"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_7_6/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_8_6" type="Polygon2D" parent="bumpers"]
+position = Vector2(400, 368.602)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_8_6"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_8_6/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_9_6" type="Polygon2D" parent="bumpers"]
+position = Vector2(440.941, 368.602)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_9_6"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_9_6/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_10_6" type="Polygon2D" parent="bumpers"]
+position = Vector2(481.882, 368.602)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_10_6"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_10_6/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_11_6" type="Polygon2D" parent="bumpers"]
+position = Vector2(522.824, 368.602)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_11_6"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_11_6/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_12_6" type="Polygon2D" parent="bumpers"]
+position = Vector2(563.765, 368.602)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_12_6"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_12_6/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_13_6" type="Polygon2D" parent="bumpers"]
+position = Vector2(604.706, 368.602)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_13_6"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_13_6/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_14_6" type="Polygon2D" parent="bumpers"]
+position = Vector2(645.647, 368.602)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_14_6"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_14_6/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_15_6" type="Polygon2D" parent="bumpers"]
+position = Vector2(686.588, 368.602)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_15_6"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_15_6/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_16_6" type="Polygon2D" parent="bumpers"]
+position = Vector2(727.529, 368.602)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_16_6"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_16_6/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_0_7" type="Polygon2D" parent="bumpers"]
+position = Vector2(92.9412, 404.059)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_0_7"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_0_7/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_1_7" type="Polygon2D" parent="bumpers"]
+position = Vector2(133.882, 404.059)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_1_7"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_1_7/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_2_7" type="Polygon2D" parent="bumpers"]
+position = Vector2(174.824, 404.059)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_2_7"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_2_7/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_3_7" type="Polygon2D" parent="bumpers"]
+position = Vector2(215.765, 404.059)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_3_7"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_3_7/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_4_7" type="Polygon2D" parent="bumpers"]
+position = Vector2(256.706, 404.059)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_4_7"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_4_7/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_5_7" type="Polygon2D" parent="bumpers"]
+position = Vector2(297.647, 404.059)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_5_7"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_5_7/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_6_7" type="Polygon2D" parent="bumpers"]
+position = Vector2(338.588, 404.059)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_6_7"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_6_7/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_7_7" type="Polygon2D" parent="bumpers"]
+position = Vector2(379.529, 404.059)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_7_7"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_7_7/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_8_7" type="Polygon2D" parent="bumpers"]
+position = Vector2(420.471, 404.059)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_8_7"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_8_7/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_9_7" type="Polygon2D" parent="bumpers"]
+position = Vector2(461.412, 404.059)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_9_7"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_9_7/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_10_7" type="Polygon2D" parent="bumpers"]
+position = Vector2(502.353, 404.059)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_10_7"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_10_7/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_11_7" type="Polygon2D" parent="bumpers"]
+position = Vector2(543.294, 404.059)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_11_7"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_11_7/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_12_7" type="Polygon2D" parent="bumpers"]
+position = Vector2(584.235, 404.059)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_12_7"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_12_7/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_13_7" type="Polygon2D" parent="bumpers"]
+position = Vector2(625.176, 404.059)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_13_7"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_13_7/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_14_7" type="Polygon2D" parent="bumpers"]
+position = Vector2(666.118, 404.059)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_14_7"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_14_7/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="bump_poly_15_7" type="Polygon2D" parent="bumpers"]
+position = Vector2(707.059, 404.059)
+polygon = PackedVector2Array(5.73176, 0, 5.29546, 2.19345, 4.05297, 4.05297, 2.19345, 5.29546, -2.50543e-07, 5.73176, -2.19345, 5.29546, -4.05297, 4.05297, -5.29546, 2.19345, -5.73176, -5.01087e-07, -5.29546, -2.19345, -4.05297, -4.05297, -2.19345, -5.29546, 6.83506e-08, -5.73176, 2.19345, -5.29546, 4.05297, -4.05297, 5.29546, -2.19345)
+
+[node name="static" type="StaticBody2D" parent="bumpers/bump_poly_15_7"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="bumpers/bump_poly_15_7/static"]
+shape = SubResource("CircleShape2D_p0ybc")
+
+[node name="goal" type="Node2D" parent="."]
+
+[node name="areas" type="Node2D" parent="goal"]
+unique_name_in_owner = true
+
+[node name="goal_area_1" type="Area2D" parent="goal/areas"]
+position = Vector2(73.1477, 729)
+
+[node name="coll_area_1" type="CollisionShape2D" parent="goal/areas/goal_area_1"]
+visible = false
+shape = SubResource("RectangleShape2D_psm7c")
+
+[node name="goal_area_2" type="Area2D" parent="goal/areas"]
+position = Vector2(127.623, 729)
+
+[node name="coll_area_2" type="CollisionShape2D" parent="goal/areas/goal_area_2"]
+visible = false
+shape = SubResource("RectangleShape2D_psm7c")
+
+[node name="goal_area_3" type="Area2D" parent="goal/areas"]
+position = Vector2(182.098, 729)
+
+[node name="coll_area_3" type="CollisionShape2D" parent="goal/areas/goal_area_3"]
+visible = false
+shape = SubResource("RectangleShape2D_psm7c")
+
+[node name="goal_area_4" type="Area2D" parent="goal/areas"]
+position = Vector2(236.574, 729)
+
+[node name="coll_area_4" type="CollisionShape2D" parent="goal/areas/goal_area_4"]
+visible = false
+shape = SubResource("RectangleShape2D_psm7c")
+
+[node name="goal_area_5" type="Area2D" parent="goal/areas"]
+position = Vector2(291.049, 729)
+
+[node name="coll_area_5" type="CollisionShape2D" parent="goal/areas/goal_area_5"]
+visible = false
+shape = SubResource("RectangleShape2D_psm7c")
+
+[node name="goal_area_6" type="Area2D" parent="goal/areas"]
+position = Vector2(345.525, 729)
+
+[node name="coll_area_6" type="CollisionShape2D" parent="goal/areas/goal_area_6"]
+visible = false
+shape = SubResource("RectangleShape2D_psm7c")
+
+[node name="goal_area_7" type="Area2D" parent="goal/areas"]
+position = Vector2(400, 729)
+
+[node name="coll_area_7" type="CollisionShape2D" parent="goal/areas/goal_area_7"]
+visible = false
+shape = SubResource("RectangleShape2D_psm7c")
+
+[node name="goal_area_8" type="Area2D" parent="goal/areas"]
+position = Vector2(454.475, 729)
+
+[node name="coll_area_8" type="CollisionShape2D" parent="goal/areas/goal_area_8"]
+visible = false
+shape = SubResource("RectangleShape2D_psm7c")
+
+[node name="goal_area_9" type="Area2D" parent="goal/areas"]
+position = Vector2(508.951, 729)
+
+[node name="coll_area_9" type="CollisionShape2D" parent="goal/areas/goal_area_9"]
+visible = false
+shape = SubResource("RectangleShape2D_psm7c")
+
+[node name="goal_area_10" type="Area2D" parent="goal/areas"]
+position = Vector2(563.426, 729)
+
+[node name="coll_area_10" type="CollisionShape2D" parent="goal/areas/goal_area_10"]
+visible = false
+shape = SubResource("RectangleShape2D_psm7c")
+
+[node name="goal_area_11" type="Area2D" parent="goal/areas"]
+position = Vector2(617.902, 729)
+
+[node name="coll_area_11" type="CollisionShape2D" parent="goal/areas/goal_area_11"]
+visible = false
+shape = SubResource("RectangleShape2D_psm7c")
+
+[node name="goal_area_12" type="Area2D" parent="goal/areas"]
+position = Vector2(672.377, 729)
+
+[node name="coll_area_12" type="CollisionShape2D" parent="goal/areas/goal_area_12"]
+visible = false
+shape = SubResource("RectangleShape2D_psm7c")
+
+[node name="goal_area_13" type="Area2D" parent="goal/areas"]
+position = Vector2(726.852, 729)
+
+[node name="coll_area_13" type="CollisionShape2D" parent="goal/areas/goal_area_13"]
+visible = false
+shape = SubResource("RectangleShape2D_psm7c")
+
+[node name="posts" type="Node2D" parent="goal"]
+unique_name_in_owner = true
+
+[node name="post_poly_1" type="Polygon2D" parent="goal/posts"]
+position = Vector2(100.385, 729)
+polygon = PackedVector2Array(-6.09, -243, -6.09, 243, 6.09, 243, 6.09, -243)
+
+[node name="static" type="StaticBody2D" parent="goal/posts/post_poly_1"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="goal/posts/post_poly_1/static"]
+position = Vector2(0, 26)
+shape = SubResource("RectangleShape2D_8l818")
+
+[node name="post_poly_2" type="Polygon2D" parent="goal/posts"]
+position = Vector2(154.861, 729)
+polygon = PackedVector2Array(-6.09, -243, -6.09, 243, 6.09, 243, 6.09, -243)
+
+[node name="static" type="StaticBody2D" parent="goal/posts/post_poly_2"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="goal/posts/post_poly_2/static"]
+position = Vector2(0, 26)
+shape = SubResource("RectangleShape2D_8l818")
+
+[node name="post_poly_3" type="Polygon2D" parent="goal/posts"]
+position = Vector2(209.336, 729)
+polygon = PackedVector2Array(-6.09, -243, -6.09, 243, 6.09, 243, 6.09, -243)
+
+[node name="static" type="StaticBody2D" parent="goal/posts/post_poly_3"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="goal/posts/post_poly_3/static"]
+position = Vector2(0, 26)
+shape = SubResource("RectangleShape2D_8l818")
+
+[node name="post_poly_4" type="Polygon2D" parent="goal/posts"]
+position = Vector2(263.812, 729)
+polygon = PackedVector2Array(-6.09, -243, -6.09, 243, 6.09, 243, 6.09, -243)
+
+[node name="static" type="StaticBody2D" parent="goal/posts/post_poly_4"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="goal/posts/post_poly_4/static"]
+position = Vector2(0, 26)
+shape = SubResource("RectangleShape2D_8l818")
+
+[node name="post_poly_5" type="Polygon2D" parent="goal/posts"]
+position = Vector2(318.287, 729)
+polygon = PackedVector2Array(-6.09, -243, -6.09, 243, 6.09, 243, 6.09, -243)
+
+[node name="static" type="StaticBody2D" parent="goal/posts/post_poly_5"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="goal/posts/post_poly_5/static"]
+position = Vector2(0, 26)
+shape = SubResource("RectangleShape2D_8l818")
+
+[node name="post_poly_6" type="Polygon2D" parent="goal/posts"]
+position = Vector2(372.762, 729)
+polygon = PackedVector2Array(-6.09, -243, -6.09, 243, 6.09, 243, 6.09, -243)
+
+[node name="static" type="StaticBody2D" parent="goal/posts/post_poly_6"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="goal/posts/post_poly_6/static"]
+position = Vector2(0, 26)
+shape = SubResource("RectangleShape2D_8l818")
+
+[node name="post_poly_7" type="Polygon2D" parent="goal/posts"]
+position = Vector2(427.238, 729)
+polygon = PackedVector2Array(-6.09, -243, -6.09, 243, 6.09, 243, 6.09, -243)
+
+[node name="static" type="StaticBody2D" parent="goal/posts/post_poly_7"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="goal/posts/post_poly_7/static"]
+position = Vector2(0, 26)
+shape = SubResource("RectangleShape2D_8l818")
+
+[node name="post_poly_8" type="Polygon2D" parent="goal/posts"]
+position = Vector2(481.713, 729)
+polygon = PackedVector2Array(-6.09, -243, -6.09, 243, 6.09, 243, 6.09, -243)
+
+[node name="static" type="StaticBody2D" parent="goal/posts/post_poly_8"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="goal/posts/post_poly_8/static"]
+position = Vector2(0, 26)
+shape = SubResource("RectangleShape2D_8l818")
+
+[node name="post_poly_9" type="Polygon2D" parent="goal/posts"]
+position = Vector2(536.188, 729)
+polygon = PackedVector2Array(-6.09, -243, -6.09, 243, 6.09, 243, 6.09, -243)
+
+[node name="static" type="StaticBody2D" parent="goal/posts/post_poly_9"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="goal/posts/post_poly_9/static"]
+position = Vector2(0, 26)
+shape = SubResource("RectangleShape2D_8l818")
+
+[node name="post_poly_10" type="Polygon2D" parent="goal/posts"]
+position = Vector2(590.664, 729)
+polygon = PackedVector2Array(-6.09, -243, -6.09, 243, 6.09, 243, 6.09, -243)
+
+[node name="static" type="StaticBody2D" parent="goal/posts/post_poly_10"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="goal/posts/post_poly_10/static"]
+position = Vector2(0, 26)
+shape = SubResource("RectangleShape2D_8l818")
+
+[node name="post_poly_11" type="Polygon2D" parent="goal/posts"]
+position = Vector2(645.139, 729)
+polygon = PackedVector2Array(-6.09, -243, -6.09, 243, 6.09, 243, 6.09, -243)
+
+[node name="static" type="StaticBody2D" parent="goal/posts/post_poly_11"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="goal/posts/post_poly_11/static"]
+position = Vector2(0, 26)
+shape = SubResource("RectangleShape2D_8l818")
+
+[node name="post_poly_12" type="Polygon2D" parent="goal/posts"]
+position = Vector2(699.615, 729)
+polygon = PackedVector2Array(-6.09, -243, -6.09, 243, 6.09, 243, 6.09, -243)
+
+[node name="static" type="StaticBody2D" parent="goal/posts/post_poly_12"]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_psm7c")
+
+[node name="coll" type="CollisionShape2D" parent="goal/posts/post_poly_12/static"]
+position = Vector2(0, 26)
+shape = SubResource("RectangleShape2D_8l818")
+
+[node name="balls" type="Node2D" parent="."]
+unique_name_in_owner = true

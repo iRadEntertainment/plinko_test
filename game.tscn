@@ -1,0 +1,435 @@
+[gd_scene load_steps=13 format=3 uid="uid://qfnn8i6souqh"]
+
+[ext_resource type="Script" uid="uid://do2ufexcdn528" path="res://game.gd" id="1_e2o6t"]
+[ext_resource type="Script" uid="uid://bob3dijy8ov56" path="res://gui.gd" id="2_feb5d"]
+[ext_resource type="PackedScene" uid="uid://br5etjyre64ws" path="res://board.tscn" id="3_feb5d"]
+[ext_resource type="Texture2D" uid="uid://igcsp57chl6k" path="res://assets/gear.svg" id="4_fc0e3"]
+[ext_resource type="Script" uid="uid://b82b4oijoppp5" path="res://bubble.gd" id="5_7jktm"]
+[ext_resource type="Script" uid="uid://f8y8yorq7kuc" path="res://poly_outline.gd" id="6_eow3j"]
+[ext_resource type="FontFile" uid="uid://dcrrdiru13yt" path="res://assets/fonts/true-crimes.ttf" id="7_eow3j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7jktm"]
+bg_color = Color(0.0727484, 0.20735, 0.188425, 0.921569)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.103446, 0.352567, 0.356125, 1)
+border_blend = true
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_vef74"]
+font = ExtResource("7_eow3j")
+font_size = 100
+font_color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+outline_size = 20
+outline_color = Color(1, 0.788235, 0.0196078, 1)
+
+[sub_resource type="Animation" id="Animation_vef74"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("cent/lb_announce:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("cent/lb_announce:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:anchor_left")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:anchor_right")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_j5wjh"]
+resource_name = "enter"
+length = 1.5
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("cent/lb_announce:visible")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("cent/bg_poly_fill:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:anchor_left")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.275, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, -0.1, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:anchor_right")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.275, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [2.0, 0.9, 1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("cent/lb_announce:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.4, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hve3p"]
+_data = {
+&"RESET": SubResource("Animation_vef74"),
+&"enter": SubResource("Animation_j5wjh")
+}
+
+[node name="game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e2o6t")
+
+[node name="sub_cnt" type="SubViewportContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+stretch = true
+
+[node name="sub" type="SubViewport" parent="sub_cnt"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(800, 1024)
+render_target_update_mode = 4
+
+[node name="board" parent="sub_cnt/sub" instance=ExtResource("3_feb5d")]
+unique_name_in_owner = true
+wall_thickness = 65.5
+goal_area_height_ratio = 0.65
+bumper_col_count = 16
+
+[node name="HUD" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_feb5d")
+
+[node name="mrg" type="MarginContainer" parent="HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="vb" type="VBoxContainer" parent="HUD/mrg"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="hb" type="HBoxContainer" parent="HUD/mrg/vb"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="btn_settings" type="Button" parent="HUD/mrg/vb/hb"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ico" type="TextureRect" parent="HUD/mrg/vb/hb/btn_settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 20.0
+offset_right = -6.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_fc0e3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="btn_start" type="Button" parent="HUD/mrg/vb/hb"]
+custom_minimum_size = Vector2(150, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Start"
+
+[node name="btn_clear" type="Button" parent="HUD/mrg/vb/hb"]
+custom_minimum_size = Vector2(150, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Clear"
+
+[node name="pnl_tools" type="PanelContainer" parent="HUD/mrg/vb"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="vb" type="VBoxContainer" parent="HUD/mrg/vb/pnl_tools"]
+layout_mode = 2
+
+[node name="hb_count" type="HBoxContainer" parent="HUD/mrg/vb/pnl_tools/vb"]
+layout_mode = 2
+
+[node name="lb" type="Label" parent="HUD/mrg/vb/pnl_tools/vb/hb_count"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Ball count"
+horizontal_alignment = 2
+
+[node name="lb_ball_count" type="Label" parent="HUD/mrg/vb/pnl_tools/vb/hb_count"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="btn_swap" type="Button" parent="HUD/mrg/vb/pnl_tools/vb"]
+visible = false
+layout_mode = 2
+text = "Swap gravity"
+
+[node name="hb_bump" type="HBoxContainer" parent="HUD/mrg/vb/pnl_tools/vb"]
+layout_mode = 2
+
+[node name="lb" type="Label" parent="HUD/mrg/vb/pnl_tools/vb/hb_bump"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Bumpers"
+horizontal_alignment = 2
+
+[node name="sl_bump_count" type="HSlider" parent="HUD/mrg/vb/pnl_tools/vb/hb_bump"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+min_value = 3.0
+max_value = 50.0
+value = 3.0
+rounded = true
+
+[node name="lb_bump_count" type="Label" parent="HUD/mrg/vb/pnl_tools/vb/hb_bump"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 0)
+layout_mode = 2
+text = "0"
+
+[node name="hb_goal" type="HBoxContainer" parent="HUD/mrg/vb/pnl_tools/vb"]
+layout_mode = 2
+
+[node name="lb" type="Label" parent="HUD/mrg/vb/pnl_tools/vb/hb_goal"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Goals"
+horizontal_alignment = 2
+
+[node name="sl_goal_count" type="HSlider" parent="HUD/mrg/vb/pnl_tools/vb/hb_goal"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+min_value = 2.0
+max_value = 30.0
+value = 2.0
+rounded = true
+
+[node name="lb_goal_count" type="Label" parent="HUD/mrg/vb/pnl_tools/vb/hb_goal"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 0)
+layout_mode = 2
+text = "0"
+
+[node name="hb_spawn" type="HBoxContainer" parent="HUD/mrg/vb/pnl_tools/vb"]
+layout_mode = 2
+
+[node name="lb" type="Label" parent="HUD/mrg/vb/pnl_tools/vb/hb_spawn"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Spawn area"
+horizontal_alignment = 2
+
+[node name="sl_spawn_area_width" type="HSlider" parent="HUD/mrg/vb/pnl_tools/vb/hb_spawn"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+
+[node name="lb_spawn_area_width" type="Label" parent="HUD/mrg/vb/pnl_tools/vb/hb_spawn"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 0)
+layout_mode = 2
+text = "0"
+
+[node name="bubble" type="Panel" parent="HUD"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -171.0
+offset_top = -172.0
+offset_right = -51.0
+offset_bottom = -52.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_7jktm")
+script = ExtResource("5_7jktm")
+dir = Vector2(0.45, -0.641)
+margin_ratio = 0.125
+reticle_width = 1.1
+glass_color = Color(0.12132, 0.91347, 7.70092e-07, 0.239216)
+metadata/_custom_type_script = "uid://b82b4oijoppp5"
+
+[node name="cnt_announce" type="CenterContainer" parent="HUD"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="cent" type="Control" parent="HUD/cnt_announce"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="bg_poly_fill" type="Polygon2D" parent="HUD/cnt_announce/cent"]
+color = Color(1, 0.498039, 0, 1)
+polygon = PackedVector2Array(-159, -50, -174, -81, -119, -57, -35, -91, -34, -53, 152, -104, 124, -64, 277, -88, 154, -35, 313, -35, 164, 7, 286, 57, 145, 36, 178, 79, 41, 46, 52, 81, -39, 51, -51, 90, -119, 51, -163, 89, -160, 41, -235, 61, -198, 24, -258, 15, -181, -14, -242, -43)
+script = ExtResource("6_eow3j")
+outline_color = Color(0.282353, 0.780392, 0.988235, 1)
+outline_sharp_limit = 10.6
+metadata/_custom_type_script = "uid://f8y8yorq7kuc"
+
+[node name="lb_announce" type="Label" parent="HUD/cnt_announce/cent"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = -236.0
+offset_top = -22.0
+offset_right = 238.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.108817
+pivot_offset = Vector2(95, 47)
+text = "Drag gravity"
+label_settings = SubResource("LabelSettings_vef74")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="anim" type="AnimationPlayer" parent="HUD/cnt_announce"]
+libraries = {
+&"": SubResource("AnimationLibrary_hve3p")
+}
+
+[connection signal="gui_input" from="sub_cnt" to="." method="_on_sub_cnt_gui_input"]
+[connection signal="resized" from="sub_cnt" to="." method="_on_sub_cnt_resized"]
+[connection signal="pressed" from="HUD/mrg/vb/hb/btn_settings" to="HUD" method="_on_btn_settings_pressed"]
+[connection signal="pressed" from="HUD/mrg/vb/hb/btn_start" to="HUD" method="_on_btn_start_pressed"]
+[connection signal="pressed" from="HUD/mrg/vb/hb/btn_clear" to="HUD" method="_on_btn_clear_pressed"]
+[connection signal="pressed" from="HUD/mrg/vb/pnl_tools/vb/btn_swap" to="HUD" method="_on_btn_swap_pressed"]
+[connection signal="drag_ended" from="HUD/mrg/vb/pnl_tools/vb/hb_bump/sl_bump_count" to="HUD" method="_on_sl_bump_count_drag_ended"]
+[connection signal="value_changed" from="HUD/mrg/vb/pnl_tools/vb/hb_bump/sl_bump_count" to="HUD" method="_on_sl_bump_count_value_changed"]
+[connection signal="drag_ended" from="HUD/mrg/vb/pnl_tools/vb/hb_goal/sl_goal_count" to="HUD" method="_on_sl_goal_count_drag_ended"]
+[connection signal="value_changed" from="HUD/mrg/vb/pnl_tools/vb/hb_goal/sl_goal_count" to="HUD" method="_on_sl_goal_count_value_changed"]
+[connection signal="drag_ended" from="HUD/mrg/vb/pnl_tools/vb/hb_spawn/sl_spawn_area_width" to="HUD" method="_on_sl_spawn_area_width_drag_ended"]
+[connection signal="mouse_entered" from="HUD/mrg/vb/pnl_tools/vb/hb_spawn/sl_spawn_area_width" to="HUD" method="_on_sl_spawn_area_width_mouse_entered"]
+[connection signal="mouse_exited" from="HUD/mrg/vb/pnl_tools/vb/hb_spawn/sl_spawn_area_width" to="HUD" method="_on_sl_spawn_area_width_mouse_exited"]
+[connection signal="value_changed" from="HUD/mrg/vb/pnl_tools/vb/hb_spawn/sl_spawn_area_width" to="HUD" method="_on_sl_spawn_area_width_value_changed"]
