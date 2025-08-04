@@ -72,3 +72,7 @@ func show_bubble(toggled: bool) -> void:
 func _on_sub_cnt_resized() -> void:
 	if not is_node_ready(): await ready
 	board.tot_dimensions = %sub_cnt.size
+
+
+func _on_btn_github_pressed() -> void:
+	OS.shell_open("https://github.com/iRadEntertainment/plinko_test")

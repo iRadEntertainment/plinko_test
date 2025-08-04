@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://qfnn8i6souqh"]
+[gd_scene load_steps=14 format=3 uid="uid://qfnn8i6souqh"]
 
 [ext_resource type="Script" uid="uid://do2ufexcdn528" path="res://game.gd" id="1_e2o6t"]
 [ext_resource type="Script" uid="uid://bob3dijy8ov56" path="res://gui.gd" id="2_feb5d"]
 [ext_resource type="PackedScene" uid="uid://br5etjyre64ws" path="res://board.tscn" id="3_feb5d"]
 [ext_resource type="Texture2D" uid="uid://igcsp57chl6k" path="res://assets/gear.svg" id="4_fc0e3"]
 [ext_resource type="Script" uid="uid://b82b4oijoppp5" path="res://bubble.gd" id="5_7jktm"]
+[ext_resource type="Texture2D" uid="uid://cj5dvrkqo2fu8" path="res://assets/icon-github.png" id="5_j5wjh"]
 [ext_resource type="Script" uid="uid://f8y8yorq7kuc" path="res://poly_outline.gd" id="6_eow3j"]
 [ext_resource type="FontFile" uid="uid://dcrrdiru13yt" path="res://assets/fonts/true-crimes.ttf" id="7_eow3j"]
 
@@ -178,9 +179,13 @@ render_target_update_mode = 4
 
 [node name="board" parent="sub_cnt/sub" instance=ExtResource("3_feb5d")]
 unique_name_in_owner = true
-wall_thickness = 65.5
-goal_area_height_ratio = 0.65
+wall_thickness = 33.0
+goal_area_height_ratio = 0.82
+post_width_ratio = 0.28
 bumper_col_count = 16
+bumper_dimension_ratio = 0.25
+spawn_to_bumpers_gap = 129.5
+bumpers_to_goal_gap = 170.0
 
 [node name="HUD" type="Control" parent="."]
 unique_name_in_owner = true
@@ -250,6 +255,28 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Clear"
+
+[node name="btn_github" type="Button" parent="HUD/mrg/vb/hb"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ico" type="TextureRect" parent="HUD/mrg/vb/hb/btn_github"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 14.0
+offset_right = -8.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_j5wjh")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="pnl_tools" type="PanelContainer" parent="HUD/mrg/vb"]
 unique_name_in_owner = true
@@ -424,6 +451,7 @@ libraries = {
 [connection signal="pressed" from="HUD/mrg/vb/hb/btn_settings" to="HUD" method="_on_btn_settings_pressed"]
 [connection signal="pressed" from="HUD/mrg/vb/hb/btn_start" to="HUD" method="_on_btn_start_pressed"]
 [connection signal="pressed" from="HUD/mrg/vb/hb/btn_clear" to="HUD" method="_on_btn_clear_pressed"]
+[connection signal="pressed" from="HUD/mrg/vb/hb/btn_github" to="." method="_on_btn_github_pressed"]
 [connection signal="pressed" from="HUD/mrg/vb/pnl_tools/vb/btn_swap" to="HUD" method="_on_btn_swap_pressed"]
 [connection signal="drag_ended" from="HUD/mrg/vb/pnl_tools/vb/hb_bump/sl_bump_count" to="HUD" method="_on_sl_bump_count_drag_ended"]
 [connection signal="value_changed" from="HUD/mrg/vb/pnl_tools/vb/hb_bump/sl_bump_count" to="HUD" method="_on_sl_bump_count_value_changed"]
